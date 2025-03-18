@@ -1,0 +1,36 @@
+/* Centrar el cuestionario */
+.cuestionario-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+  }
+  
+  /* Tarjeta del formulario */
+  .cuestionario-card {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilo del botón */
+  .btn-custom {
+    width: 100%;
+    background-color: #6e8efb;
+    border: none;
+    transition: 0.3s;
+  }
+  
+  .btn-custom:hover {
+    background-color: #4a6edb;
+  }
+  
+  /* Label en negrita */
+  .form-label {
+    font-weight: bold;
+  }
+  

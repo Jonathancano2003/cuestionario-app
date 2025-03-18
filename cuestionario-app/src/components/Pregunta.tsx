@@ -11,10 +11,10 @@ interface PreguntaProps {
 
 const Pregunta: React.FC<PreguntaProps> = ({ id, tipo, pregunta, opciones, respuesta, onChange }) => {
   return (
-    <div>
-      <label>{pregunta}</label>
+    <div className="mb-3">
+      <label className="form-label">{pregunta}</label>
       {tipo === "select" ? (
-        <select value={respuesta} onChange={(e) => onChange(id, e.target.value)}>
+        <select className="form-select" value={respuesta} onChange={(e) => onChange(id, e.target.value)}>
           <option value="">Selecciona una opción</option>
           {opciones?.map((opcion, index) => (
             <option key={index} value={opcion}>
@@ -23,7 +23,12 @@ const Pregunta: React.FC<PreguntaProps> = ({ id, tipo, pregunta, opciones, respu
           ))}
         </select>
       ) : (
-        <input type={tipo} value={respuesta} onChange={(e) => onChange(id, e.target.value)} />
+        <input
+          type={tipo}
+          className="form-control"
+          value={respuesta}
+          onChange={(e) => onChange(id, e.target.value)}
+        />
       )}
     </div>
   );

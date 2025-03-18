@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Pregunta from "./Pregunta";
 import { cargarRespuestas, guardarRespuestas } from "../utils/localStorage";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../styles.css"; // Importamos los estilos personalizados
 
 interface Pregunta {
   id: string;
@@ -55,33 +57,37 @@ const CuestionarioComponent: React.FC = () => {
     console.log("Respuestas enviadas:", respuestas);
 
     if (indiceActual < cuestionarios.length - 1) {
-      setIndiceActual(indiceActual + 1); // ✅ Pasa al siguiente cuestionario
+      setIndiceActual(indiceActual + 1);
     } else {
       alert("¡Has completado todos los cuestionarios!");
     }
   };
 
-  if (cuestionarios.length === 0) return <div>Cargando cuestionario...</div>;
+  if (cuestionarios.length === 0) return <div className="text-center mt-5">Cargando cuestionario...</div>;
 
   const cuestionarioActual = cuestionarios[indiceActual];
 
   return (
-    <div>
-      <h2>{cuestionarioActual.titulo}</h2>
-      <form onSubmit={handleSubmit}>
-        {cuestionarioActual.preguntas.map((pregunta) => (
-          <Pregunta
-            key={pregunta.id}
-            id={pregunta.id}
-            tipo={pregunta.tipo}
-            pregunta={pregunta.pregunta}
-            opciones={pregunta.opciones}
-            respuesta={respuestas[pregunta.id] || ""}
-            onChange={handleRespuestaChange}
-          />
-        ))}
-        <button type="submit">Siguiente</button>
-      </form>
+    <div className="cuestionario-container">
+      <div className="cuestionario-card">
+        <h2>{cuestionarioActual.titulo}</h2>
+        <form onSubmit={handleSubmit}>
+          {cuestionarioActual.preguntas.map((pregunta) => (
+            <Pregunta
+              key={pregunta.id}
+              id={pregunta.id}
+              tipo={pregunta.tipo}
+              pregunta={pregunta.pregunta}
+              opciones={pregunta.opciones}
+              respuesta={respuestas[pregunta.id] || ""}
+              onChange={handleRespuestaChange}
+            />
+          ))}
+          <button type="submit" className="btn btn-custom mt-3">
+            Siguiente
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,7 @@
 import React from "react";
 import CuestionarioComponent from "./components/Cuestionario";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./styles.css";
 
 const App: React.FC = () => {
   return (
