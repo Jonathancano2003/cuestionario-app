@@ -1,0 +1,235 @@
+[
+    {
+      "titulo": "User Data Questionnaire",
+      "preguntas": [
+        {
+          "id": "name",
+          "tipo": "text",
+          "pregunta": "What's your name?",
+          "respuesta": "",
+          "restricciones": {
+            "min": 3,
+            "max": 50
+          }
+        },
+        {
+          "id": "date_of_birth",
+          "tipo": "text",
+          "pregunta": "What is your date of birth?",
+          "respuesta": "",
+          "restricciones": {
+            "min": 1,
+            "max": 10
+          },
+          "validacion": {
+            "min_edad": 17
+          }
+        },
+        {
+          "id": "email",
+          "tipo": "text",
+          "pregunta": "What is your email?",
+          "respuesta": "",
+          "restricciones": {
+            "min": 5,
+            "max": 100
+          },
+          "validacion": {
+            "formato": "email",
+            "dominio": "stucom.com"
+          }
+        },
+        {
+          "id": "sex",
+          "tipo": "select",
+          "pregunta": "What is your gender?",
+          "respuesta": "",
+          "opciones": [
+            "Male",
+            "Female",
+            "Other"
+          ]
+        },
+        {
+          "id": "preferences",
+          "tipo": "check",
+          "pregunta": "What do you prefer to do in your free time?",
+          "respuesta": "",
+          "opciones": [
+            "Reading",
+            "Sports",
+            "Traveling",
+            "Cinema"
+          ]
+        }
+      ]
+    },
+    {
+      "titulo": "Academic Evaluation Questionnaire",
+      "preguntas": [
+        {
+          "id": "comments",
+          "tipo": "textarea",
+          "pregunta": "What would you improve in the course?",
+          "respuesta": "The course content is fine, but more practical examples would be useful.",
+          "restricciones": {
+            "min": 15,
+            "max": 250
+          }
+        },
+        {
+          "id": "satisfaction",
+          "tipo": "select",
+          "pregunta": "How satisfied are you with the course content?",
+          "respuesta": "4",
+          "opciones": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        {
+          "id": "attendance",
+          "tipo": "check",
+          "pregunta": "Did you attend all classes?",
+          "respuesta": "no",
+          "opciones": [
+            "yes",
+            "no"
+          ]
+        },
+        {
+          "id": "schedules",
+          "tipo": "check",
+          "pregunta": "Which schedules do you prefer for classes? (Select up to 2 options)",
+          "respuesta": [],
+          "opciones": [
+            "Monday 9:00 AM - 11:00 AM",
+            "Tuesday 3:00 PM - 5:00 PM",
+            "Wednesday 10:00 AM - 12:00 PM",
+            "Thursday 1:00 PM - 3:00 PM",
+            "Friday 4:00 PM - 6:00 PM"
+          ],
+          "validacion": {
+            "max_seleccionados": 2
+          }
+        }
+      ]
+    },
+    {
+      "titulo": "Technology Preferences Survey",
+      "preguntas": [
+        {
+          "id": "comments",
+          "tipo": "textarea",
+          "pregunta": "What technology would you like to learn in the future?",
+          "respuesta": "I would like to learn about artificial intelligence and machine learning.",
+          "restricciones": {
+            "min": 20,
+            "max": 200
+          }
+        },
+        {
+          "id": "operating_system",
+          "tipo": "select",
+          "pregunta": "Which operating system do you prefer to use?",
+          "respuesta": "Linux",
+          "opciones": [
+            "Windows",
+            "Linux",
+            "MacOS"
+          ]
+        },
+        {
+          "id": "products",
+          "tipo": "check",
+          "pregunta": "What devices do you regularly use? (Select up to 2 options)",
+          "respuesta": [
+            "smartphone"
+          ],
+          "opciones": [
+            "smartphone",
+            "laptop",
+            "tablet",
+            "smartwatch"
+          ],
+          "validacion": {
+            "max_seleccionados": 2
+          }
+        },
+        {
+          "id": "time",
+          "tipo": "select",
+          "pregunta": "How many hours per week do you dedicate to learning about technology?",
+          "respuesta": "5",
+          "opciones": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ]
+        }
+      ]
+    },
+    {
+      "titulo": "Cinema Preferences Survey",
+      "preguntas": [
+        {
+          "id": "comments",
+          "tipo": "textarea",
+          "pregunta": "What movie genres do you prefer?",
+          "respuesta": "Action, science fiction, and comedy.",
+          "restricciones": {
+            "min": 10,
+            "max": 150
+          }
+        },
+        {
+          "id": "favorite",
+          "tipo": "select",
+          "pregunta": "What is your favorite movie?",
+          "respuesta": "Inception",
+          "opciones": [
+            "Inception",
+            "The Matrix",
+            "Avengers",
+            "Titanic"
+          ]
+        },
+        {
+          "id": "viewed",
+          "tipo": "check",
+          "pregunta": "Have you seen any of the following movies?",
+          "respuesta": "yes",
+          "opciones": [
+            "Inception",
+            "The Matrix",
+            "Avengers",
+            "Titanic"
+          ]
+        },
+        {
+          "id": "frequency",
+          "tipo": "select",
+          "pregunta": "How often do you watch movies?",
+          "respuesta": "4",
+          "opciones": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        }
+      ]
+    }
+  ]
+  

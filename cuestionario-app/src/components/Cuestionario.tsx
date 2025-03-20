@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Pregunta from "./Pregunta";
+import Resumen from "./Resumen";
 import { cargarRespuestas, guardarRespuestas } from "../utils/localStorage";
+import "../i18n"; 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles.css";
+import "../styles.css"; 
 
 interface Pregunta {
   id: string;
@@ -17,72 +20,87 @@ interface Cuestionario {
 }
 
 const CuestionarioComponent: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const [cuestionarios, setCuestionarios] = useState<Cuestionario[]>([]);
   const [indiceActual, setIndiceActual] = useState(0);
   const [respuestas, setRespuestas] = useState<{ [key: string]: string | string[] }>(cargarRespuestas());
+  const [finalizado, setFinalizado] = useState(false);
+  const [idioma, setIdioma] = useState(i18n.language === "en");
 
   useEffect(() => {
     const fetchCuestionarios = async () => {
       try {
-        const response = await fetch("/cuestionario.json");
+        const archivo = idioma ? "/cuestionario_en.json" : "/cuestionario.json";
+        const response = await fetch(archivo);
+
         if (!response.ok) {
           throw new Error(`Error HTTP: ${response.status}`);
         }
-        const data: Cuestionario[] = await response.json();
-        console.log("JSON cargado:", data);
-        if (!Array.isArray(data) || data.length === 0) {
-          throw new Error("El JSON no contiene cuestionarios.");
-        }
+
+        const data: Cuestionario[] = await response.json(); // ✅ Asegurar el tipo
         setCuestionarios(data);
       } catch (error) {
         console.error("Error al cargar los cuestionarios:", error);
       }
-      
     };
+
     fetchCuestionarios();
-    
-  }, []);
+  }, [idioma]);
 
-  const handleRespuestaChange = (id: string, value: string | string[]) => {
-    const nuevasRespuestas = { ...respuestas, [id]: value };
-    setRespuestas(nuevasRespuestas);
-    guardarRespuestas(nuevasRespuestas);
+  const toggleIdioma = () => {
+    const nuevoIdioma = idioma ? "es" : "en";
+    setIdioma(!idioma);
+    i18n.changeLanguage(nuevoIdioma);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Respuestas enviadas:", respuestas);
-    if (indiceActual < cuestionarios.length - 1) {
-      setIndiceActual(indiceActual + 1);
-    } else {
-      alert("¡Has completado todos los cuestionarios!");
-    }
-  };
-
-  if (cuestionarios.length === 0) return <div className="text-center mt-5">Cargando cuestionario...</div>;
-
-  const cuestionarioActual = cuestionarios[indiceActual];
+  if (cuestionarios.length === 0 || !cuestionarios[indiceActual]) {
+    return <div className="text-center mt-5">{t("loading")}</div>;
+  }
 
   return (
     <div className="cuestionario-container">
+      <div className="language-toggle">
+        <label className="switch">
+          <input type="checkbox" className="toggle" checked={idioma} onChange={toggleIdioma} />
+          <span className="slider"></span>
+        </label>
+      </div>
+
       <div className="cuestionario-card">
-        <h2>{cuestionarioActual.titulo}</h2>
-        <form onSubmit={handleSubmit}>
-          {cuestionarioActual.preguntas.map((pregunta) => (
-            <Pregunta
-              key={pregunta.id}
-              id={pregunta.id}
-              tipo={pregunta.tipo}
-              pregunta={pregunta.pregunta}
-              opciones={pregunta.opciones}
-              respuesta={respuestas[pregunta.id] || ""}
-              onChange={handleRespuestaChange}
-            />
-          ))}
-          <button type="submit" className="btn btn-custom mt-3">
-            Siguiente
-          </button>
-        </form>
+        {finalizado ? (
+          <Resumen respuestas={respuestas} />
+        ) : (
+          <>
+            <h2>{cuestionarios[indiceActual].titulo}</h2>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              if (indiceActual < cuestionarios.length - 1) {
+                setIndiceActual(indiceActual + 1);
+              } else {
+                setFinalizado(true);
+              }
+            }}>
+              {cuestionarios[indiceActual].preguntas.map((pregunta) => (
+                <Pregunta
+                  key={pregunta.id}
+                  id={pregunta.id}
+                  tipo={pregunta.tipo}
+                  pregunta={pregunta.pregunta}
+                  opciones={pregunta.opciones}
+                  respuesta={respuestas[pregunta.id] || ""}
+                  onChange={(id, value) => {
+                    const nuevasRespuestas = { ...respuestas, [id]: value };
+                    setRespuestas(nuevasRespuestas);
+                    guardarRespuestas(nuevasRespuestas);
+                  }}
+                />
+              ))}
+              <button type="submit" className="btn btn-custom mt-3">
+                {indiceActual < cuestionarios.length - 1 ? t("next") : t("finish")}
+              </button>
+            </form>
+          </>
+        )}
       </div>
     </div>
   );

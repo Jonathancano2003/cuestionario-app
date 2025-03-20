@@ -1,36 +1,110 @@
-/* Centrar el cuestionario */
+/* ✅ Centrar correctamente el cuestionario */
 .cuestionario-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
-  }
-  
-  /* Tarjeta del formulario */
-  .cuestionario-card {
-    width: 100%;
-    max-width: 600px;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Estilo del botón */
-  .btn-custom {
-    width: 100%;
-    background-color: #6e8efb;
-    border: none;
-    transition: 0.3s;
-  }
-  
-  .btn-custom:hover {
-    background-color: #4a6edb;
-  }
-  
-  /* Label en negrita */
-  .form-label {
-    font-weight: bold;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  position: relative;
+}
+
+/* ✅ Ajuste del tamaño máximo del formulario */
+.cuestionario-card {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* ✅ Estilos para el toggle, centrado sobre el formulario */
+.language-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* ✅ Estilo del switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 70px;
+  height: 36px;
+}
+
+.toggle {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  box-sizing: border-box;
+  border-radius: 100px;
+  border: 2px solid #323232;
+  box-shadow: 4px 4px #323232;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+}
+
+.slider:before {
+  content: "ES";
+  box-sizing: border-box;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  left: 2px;
+  bottom: 1px;
+  border: 2px solid #323232;
+  border-radius: 100px;
+  background-color: #fff;
+  color: #323232;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 25px;
+  transition: 0.3s;
+}
+
+.toggle:checked + .slider {
+  background-color: #2d8cf0;
+}
+
+.toggle:checked + .slider:before {
+  content: "EN";
+  transform: translateX(32px);
+}
+
+/* ✅ Restaurar el estilo de los botones */
+.btn-custom {
+  width: 100%;
+  background-color: #6e8efb;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-custom:hover {
+  background-color: #4a6edb;
+}
+
+/* ✅ Ajustar el banner */
+.img-fluid {
+  width: 100%;
+  max-height: 250px; /* Ajusta la altura para que no sea demasiado grande */
+  object-fit: cover; /* Evita que la imagen se deforme */
+}
